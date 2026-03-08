@@ -1,0 +1,62 @@
+# ============================================
+# Luminary Academy — Netlify Configuration
+# ============================================
+
+[build]
+  publish = "."
+
+# ============================================
+# Security Headers (OWASP Top 10 Compliance)
+# ============================================
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent clickjacking (OWASP A05)
+    X-Frame-Options = "DENY"
+
+    # Prevent MIME sniffing (OWASP A05)
+    X-Content-Type-Options = "nosniff"
+
+    # XSS Protection (OWASP A03)
+    X-XSS-Protection = "1; mode=block"
+
+    # Force HTTPS (OWASP A02)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+    # Referrer Policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Permissions Policy
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(self), payment=()"
+
+    # Content Security Policy (OWASP A03 - XSS Prevention)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
+
+# ============================================
+# Redirects
+# ============================================
+[[redirects]]
+  from = "/parent"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/teacher"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/student"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/enroll"
+  to = "/index.html"
+  status = 200
+
+# Catch-all redirect for 404s
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

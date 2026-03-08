@@ -1,0 +1,8 @@
+# Luminary Academy — robots.txt
+# Allows search engines to index the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location (update with your actual Netlify URL)
+Sitemap: https://luminaryacademy.netlify.app/sitemap.xml

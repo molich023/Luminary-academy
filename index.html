@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luminary Academy — Where Futures Begin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --gold: #e8a020;
+    --gold-light: #f5c842;
+    --cream: #faf8f3;
+    --white: #ffffff;
+    --teal: #1a8c7a;
+    --teal-light: #25b89e;
+    --coral: #e05a3a;
+    --lavender: #7c6fcd;
+    --text: #1e2d3d;
+    --text-light: #5a6a7a;
+    --border: #e2ddd5;
+    --success: #2ecc71;
+    --warning: #f39c12;
+    --danger: #e74c3c;
+    --shadow: 0 8px 40px rgba(10,22,40,0.12);
+    --shadow-lg: 0 20px 60px rgba(10,22,40,0.2);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* SCROLL BEHAVIOR */
+  html { scroll-behavior: smooth; }
+
+  /* ========= NAV ========= */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:1000;
+    background: rgba(10,22,40,0.97);
+    backdrop-filter: blur(20px);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    border-bottom: 1px solid rgba(232,160,32,0.2);
+  }
+  .nav-logo {
+    display:flex; align-items:center; gap:12px;
+    text-decoration:none;
+  }
+  .logo-emblem {
+    width:42px; height:42px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; font-weight:900; color:var(--navy);
+    font-family:'Playfair Display', serif;
+  }
+  .logo-text { color:var(--white); font-family:'Playfair Display',serif; font-size:18px; font-weight:700; line-height:1.1; }
+  .logo-sub { color:var(--gold); font-size:10px; letter-spacing:2px; text-transform:uppercase; font-family:'Space Mono',monospace; }
+
+  .nav-links { display:flex; align-items:center; gap:6px; }
+  .nav-links a {
+    color:rgba(255,255,255,0.75);
+    text-decoration:none; padding:8px 14px; border-radius:8px;
+    font-size:14px; font-weight:500; transition:all 0.2s;
+  }
+  .nav-links a:hover { color:var(--gold); background:rgba(232,160,32,0.1); }
+
+  .nav-actions { display:flex; gap:10px; }
+  .btn-nav {
+    padding:9px 20px; border-radius:8px; font-size:13px; font-weight:600;
+    cursor:pointer; border:none; transition:all 0.2s; font-family:'DM Sans',sans-serif;
+  }
+  .btn-login { background:rgba(255,255,255,0.1); color:var(--white); border:1px solid rgba(255,255,255,0.2); }
+  .btn-login:hover { background:rgba(255,255,255,0.2); }
+  .btn-enroll { background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:var(--navy); }
+  .btn-enroll:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(232,160,32,0.4); }
+
+  /* ========= HERO ========= */
+  #home {
+    min-height: 100vh;
+    background: var(--navy);
+    position:relative; overflow:hidden;
+    display:flex; align-items:center;
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(26,140,122,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(232,160,32,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 10%, rgba(124,111,205,0.1) 0%, transparent 40%);
+  }
+  .hero-grid {
+    position:absolute; inset:0;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content {
+    position:relative; z-index:2;
+    max-width:1200px; margin:0 auto; padding:120px 40px 80px;
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+  }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(232,160,32,0.15); border:1px solid rgba(232,160,32,0.3);
+    padding:6px 16px; border-radius:100px; margin-bottom:24px;
+    color:var(--gold); font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+    font-family:'Space Mono',monospace;
+  }
+  .hero-badge span { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+  .hero-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(38px,5vw,68px);
+    font-weight:900; line-height:1.05;
+    color:var(--white); margin-bottom:20px;
+  }
+  .hero-title em { color:var(--gold); font-style:normal; }
+  .hero-desc { color:rgba(255,255,255,0.65); font-size:17px; line-height:1.7; margin-bottom:36px; max-width:480px; }
+
+  .hero-cta { display:flex; gap:14px; flex-wrap:wrap; }
+  .btn-primary {
+    padding:14px 32px; border-radius:10px; font-size:15px; font-weight:600;
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:var(--navy); border:none; cursor:pointer; transition:all 0.3s;
+    font-family:'DM Sans',sans-serif; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(232,160,32,0.4); }
+  .btn-secondary {
+    padding:14px 32px; border-radius:10px; font-size:15px; font-weight:600;
+    background:transparent; color:var(--white);
+    border:2px solid rgba(255,255,255,0.25); cursor:pointer; transition:all 0.3s;
+    font-family:'DM Sans',sans-serif; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-secondary:hover { border-color:var(--gold); color:var(--gold); }
+
+  .hero-stats {
+    display:flex; gap:32px; margin-top:44px; padding-top:40px;
+    border-top:1px solid rgba(255,255,255,0.1);
+  }
+  .stat-item { }
+  .stat-num { font-family:'Playfair Display',serif; font-size:32px; font-weight:900; color:var(--gold); }
+  .stat-label { color:rgba(255,255,255,0.5); font-size:12px; text-transform:uppercase; letter-spacing:1px; margin-top:2px; }
+
+  .hero-visual {
+    position:relative;
+  }
+  .hero-card-stack { position:relative; height:480px; }
+  .hero-card {
+    position:absolute; border-radius:20px; padding:24px;
+    background:rgba(255,255,255,0.06); backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.1);
+  }
+  .hc1 { top:0; left:0; right:40px; }
+  .hc2 { top:60px; left:40px; right:0; background:rgba(26,140,122,0.15); border-color:rgba(26,140,122,0.3); }
+  .hc3 { top:280px; left:0; right:80px; background:rgba(232,160,32,0.1); border-color:rgba(232,160,32,0.25); }
+
+  .hc-title { color:var(--white); font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:16px; opacity:0.6; }
+  .hc-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+  .hc-avatar { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+  .hc-info .name { color:var(--white); font-size:13px; font-weight:600; }
+  .hc-info .sub { color:rgba(255,255,255,0.45); font-size:11px; }
+  .hc-grade { margin-left:auto; background:rgba(46,204,113,0.2); color:#2ecc71; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; }
+  .hc-grade.b { background:rgba(52,152,219,0.2); color:#3498db; }
+  .notif-pill {
+    display:flex; align-items:center; gap:10px;
+    background:var(--white); border-radius:12px; padding:12px 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    margin-bottom:8px;
+  }
+  .notif-icon { font-size:20px; }
+  .notif-text .t1 { font-size:12px; font-weight:600; color:var(--text); }
+  .notif-text .t2 { font-size:11px; color:var(--text-light); }
+  .notif-time { margin-left:auto; font-size:10px; color:var(--text-light); font-family:'Space Mono',monospace; }
+
+  /* ========= SECTIONS ========= */
+  section { padding: 100px 40px; }
+  .container { max-width:1200px; margin:0 auto; }
+  .section-label { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:12px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(28px,3.5vw,46px); font-weight:900; color:var(--navy); margin-bottom:16px; line-height:1.15; }
+  .section-desc { color:var(--text-light); font-size:16px; line-height:1.7; max-width:560px; }
+
+  /* ========= WHY LUMINARY ========= */
+  #why { background:var(--white); }
+  .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-top:60px; }
+  .why-features { display:grid; gap:24px; }
+  .why-feature {
+    display:flex; gap:20px; padding:24px; border-radius:16px;
+    background:var(--cream); border:1px solid var(--border);
+    transition:all 0.3s;
+  }
+  .why-feature:hover { border-color:var(--teal); transform:translateX(4px); box-shadow:var(--shadow); }
+  .feat-icon {
+    width:52px; height:52px; border-radius:14px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:24px;
+  }
+  .feat-body h3 { font-size:16px; font-weight:700; color:var(--navy); margin-bottom:6px; }
+  .feat-body p { font-size:14px; color:var(--text-light); line-height:1.6; }
+
+  .why-image-area {
+    position:relative; height:520px;
+  }
+  .wi-main {
+    position:absolute; top:0; left:0; right:20px; bottom:60px;
+    background:linear-gradient(135deg, var(--navy) 0%, #1a3a6b 100%);
+    border-radius:24px; overflow:hidden;
+    display:flex; flex-direction:column; padding:32px;
+  }
+  .wi-photo-placeholder {
+    flex:1; background:linear-gradient(135deg, rgba(26,140,122,0.3), rgba(232,160,32,0.2));
+    border-radius:16px; display:flex; align-items:center; justify-content:center;
+    font-size:60px; margin-bottom:20px;
+  }
+  .wi-caption { color:var(--white); }
+  .wi-caption .cap-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; margin-bottom:4px; }
+  .wi-caption .cap-sub { color:rgba(255,255,255,0.55); font-size:13px; }
+
+  .wi-badge {
+    position:absolute; bottom:20px; right:0;
+    background:var(--white); border-radius:16px; padding:20px 24px;
+    box-shadow:var(--shadow-lg); min-width:200px;
+  }
+  .wi-badge .badge-num { font-family:'Playfair Display',serif; font-size:36px; font-weight:900; color:var(--gold); }
+  .wi-badge .badge-label { color:var(--text-light); font-size:13px; margin-top:2px; }
+
+  /* ========= ADVANTAGES ========= */
+  #advantages { background:var(--navy); position:relative; overflow:hidden; }
+  #advantages::before {
+    content:''; position:absolute; top:-100px; right:-100px;
+    width:400px; height:400px; border-radius:50%;
+    background:radial-gradient(circle, rgba(232,160,32,0.12) 0%, transparent 70%);
+  }
+  .adv-header { text-align:center; max-width:600px; margin:0 auto 60px; }
+  .adv-header .section-title { color:var(--white); }
+  .adv-header .section-desc { margin:0 auto; }
+
+  .adv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .adv-card {
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+    border-radius:20px; padding:32px 28px; transition:all 0.3s; position:relative; overflow:hidden;
+  }
+  .adv-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--gold), var(--teal));
+    opacity:0; transition:opacity 0.3s;
+  }
+  .adv-card:hover { background:rgba(255,255,255,0.07); border-color:rgba(232,160,32,0.2); transform:translateY(-4px); }
+  .adv-card:hover::before { opacity:1; }
+  .adv-icon { font-size:36px; margin-bottom:20px; }
+  .adv-card h3 { color:var(--white); font-size:18px; font-weight:700; margin-bottom:10px; font-family:'Playfair Display',serif; }
+  .adv-card p { color:rgba(255,255,255,0.55); font-size:14px; line-height:1.7; }
+  .adv-tag {
+    display:inline-block; margin-top:16px;
+    background:rgba(232,160,32,0.15); color:var(--gold);
+    padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600;
+    font-family:'Space Mono',monospace; letter-spacing:0.5px;
+  }
+
+  /* ========= PORTALS ========= */
+  #portals { background:var(--cream); }
+  .portals-tabs {
+    display:flex; gap:8px; margin-bottom:40px;
+    background:var(--white); border:1px solid var(--border);
+    padding:6px; border-radius:14px; width:fit-content;
+  }
+  .portal-tab {
+    padding:10px 24px; border-radius:10px; border:none;
+    font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s;
+    font-family:'DM Sans',sans-serif; color:var(--text-light); background:transparent;
+  }
+  .portal-tab.active { background:var(--navy); color:var(--white); box-shadow:0 4px 12px rgba(10,22,40,0.2); }
+
+  .portal-content { display:none; }
+  .portal-content.active { display:grid; grid-template-columns:1fr 1.2fr; gap:60px; align-items:start; }
+
+  .portal-info h3 { font-family:'Playfair Display',serif; font-size:28px; font-weight:900; color:var(--navy); margin-bottom:12px; }
+  .portal-info p { color:var(--text-light); font-size:15px; line-height:1.7; margin-bottom:24px; }
+  .portal-features { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .portal-features li {
+    display:flex; align-items:center; gap:12px;
+    color:var(--text); font-size:14px; padding:12px 16px;
+    background:var(--white); border:1px solid var(--border); border-radius:10px;
+  }
+  .portal-features li .pf-icon { font-size:18px; width:32px; text-align:center; }
+  .portal-features li strong { font-weight:600; }
+
+  .portal-mockup {
+    background:var(--white); border-radius:20px; overflow:hidden;
+    box-shadow:var(--shadow-lg); border:1px solid var(--border);
+  }
+  .mockup-header {
+    background:var(--navy); padding:16px 20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .mockup-dots { display:flex; gap:6px; }
+  .mockup-dots span { width:10px; height:10px; border-radius:50%; }
+  .dot-r { background:#ff5f57; }
+  .dot-y { background:#febc2e; }
+  .dot-g { background:#28c840; }
+  .mockup-url { flex:1; background:rgba(255,255,255,0.1); border-radius:6px; padding:5px 14px; color:rgba(255,255,255,0.5); font-size:11px; font-family:'Space Mono',monospace; }
+  .mockup-body { padding:24px; }
+
+  /* ===== PARENT PORTAL MOCKUP ===== */
+  .portal-dash-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+  .portal-dash-header h4 { font-size:16px; font-weight:700; color:var(--navy); }
+  .portal-dash-header span { font-size:12px; color:var(--text-light); }
+  .child-selector {
+    display:flex; gap:10px; margin-bottom:20px; overflow-x:auto; padding-bottom:4px;
+  }
+  .child-chip {
+    display:flex; align-items:center; gap:8px; padding:8px 16px;
+    border-radius:100px; border:2px solid var(--border); background:var(--white);
+    cursor:pointer; white-space:nowrap; font-size:13px; transition:all 0.2s; font-weight:500;
+  }
+  .child-chip.selected { border-color:var(--navy); background:var(--navy); color:var(--white); }
+  .child-chip .ch-avatar { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; }
+  .progress-cards { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+  .prog-card {
+    background:var(--cream); border-radius:12px; padding:14px;
+    border:1px solid var(--border);
+  }
+  .prog-card .pc-subject { font-size:11px; color:var(--text-light); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+  .prog-card .pc-grade { font-family:'Playfair Display',serif; font-size:22px; font-weight:900; color:var(--navy); }
+  .prog-card .pc-bar { height:4px; background:var(--border); border-radius:2px; margin-top:8px; overflow:hidden; }
+  .prog-card .pc-fill { height:100%; border-radius:2px; }
+  .notif-feed { display:flex; flex-direction:column; gap:8px; }
+  .nf-item {
+    display:flex; gap:12px; align-items:flex-start; padding:12px;
+    background:var(--cream); border-radius:10px; border:1px solid var(--border);
+  }
+  .nf-icon { font-size:18px; flex-shrink:0; }
+  .nf-text .nf-t { font-size:12px; font-weight:600; color:var(--navy); }
+  .nf-text .nf-s { font-size:11px; color:var(--text-light); margin-top:2px; }
+  .nf-time { margin-left:auto; font-size:10px; color:var(--text-light); white-space:nowrap; font-family:'Space Mono',monospace; }
+
+  /* ===== TEACHER MOCKUP ===== */
+  .assign-list { display:flex; flex-direction:column; gap:10px; }
+  .assign-item {
+    display:flex; gap:12px; align-items:center; padding:12px 14px;
+    background:var(--cream); border-radius:10px; border:1px solid var(--border);
+  }
+  .assign-item .ai-icon { font-size:20px; }
+  .assign-item .ai-info .ai-title { font-size:13px; font-weight:600; color:var(--navy); }
+  .assign-item .ai-info .ai-sub { font-size:11px; color:var(--text-light); }
+  .assign-item .ai-badge {
+    margin-left:auto; padding:3px 10px; border-radius:20px; font-size:10px; font-weight:700;
+    font-family:'Space Mono',monospace;
+  }
+  .badge-pending { background:rgba(243,156,18,0.15); color:var(--warning); }
+  .badge-graded { background:rgba(46,204,113,0.15); color:var(--success); }
+  .badge-new { background:rgba(52,152,219,0.15); color:#3498db; }
+
+  .post-btn {
+    width:100%; padding:12px; border-radius:10px; border:2px dashed var(--border);
+    background:transparent; color:var(--text-light); font-size:13px; cursor:pointer;
+    transition:all 0.2s; font-family:'DM Sans',sans-serif; margin-top:12px;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .post-btn:hover { border-color:var(--teal); color:var(--teal); background:rgba(26,140,122,0.05); }
+
+  .class-roster {
+    display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;
+  }
+  .roster-chip {
+    display:flex; align-items:center; gap:6px; padding:5px 12px;
+    background:var(--white); border:1px solid var(--border); border-radius:20px;
+    font-size:11px; color:var(--text);
+  }
+  .roster-chip .rc-dot { width:7px; height:7px; border-radius:50%; background:var(--success); }
+
+  /* ===== STUDENT MOCKUP ===== */
+  .student-hello { margin-bottom:16px; }
+  .student-hello .sh-greeting { font-size:12px; color:var(--text-light); }
+  .student-hello .sh-name { font-size:18px; font-weight:700; color:var(--navy); font-family:'Playfair Display',serif; }
+  .hw-list { display:flex; flex-direction:column; gap:8px; }
+  .hw-item {
+    display:flex; align-items:center; gap:12px; padding:12px 14px;
+    background:var(--cream); border-radius:10px; border:1px solid var(--border);
+    cursor:pointer; transition:all 0.2s;
+  }
+  .hw-item:hover { border-color:var(--teal); }
+  .hw-checkbox {
+    width:20px; height:20px; border-radius:6px; border:2px solid var(--border);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.2s;
+  }
+  .hw-item.done .hw-checkbox { background:var(--success); border-color:var(--success); color:var(--white); font-size:11px; }
+  .hw-item .hw-info .hw-title { font-size:13px; font-weight:600; color:var(--navy); }
+  .hw-item .hw-info .hw-due { font-size:11px; color:var(--text-light); }
+  .hw-item.done .hw-info .hw-title { text-decoration:line-through; color:var(--text-light); }
+  .hw-item .hw-pts { margin-left:auto; font-size:11px; font-weight:700; color:var(--teal); }
+  .xp-bar-area { margin-top:16px; }
+  .xp-label { display:flex; justify-content:space-between; margin-bottom:6px; }
+  .xp-label span { font-size:11px; color:var(--text-light); }
+  .xp-label strong { font-size:11px; color:var(--teal); font-weight:700; }
+  .xp-bar { height:8px; background:var(--border); border-radius:4px; overflow:hidden; }
+  .xp-fill { height:100%; background:linear-gradient(90deg,var(--teal),var(--teal-light)); border-radius:4px; width:67%; }
+
+  /* ========= LOGIN SECTION ========= */
+  #login { background:var(--white); }
+  .login-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:60px; }
+  .login-card {
+    border-radius:24px; overflow:hidden;
+    box-shadow:var(--shadow); border:1px solid var(--border);
+    transition:all 0.3s;
+  }
+  .login-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+  .lc-header { padding:32px; position:relative; overflow:hidden; }
+  .lc-icon { font-size:40px; margin-bottom:16px; display:block; }
+  .lc-title { font-family:'Playfair Display',serif; font-size:22px; font-weight:900; color:var(--white); margin-bottom:6px; }
+  .lc-sub { color:rgba(255,255,255,0.65); font-size:13px; }
+  .lc-body { padding:28px; }
+
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block; font-size:12px; font-weight:600; color:var(--text-light); margin-bottom:6px; letter-spacing:0.5px; text-transform:uppercase; }
+  .form-group input, .form-group select {
+    width:100%; padding:11px 14px; border-radius:10px;
+    border:1.5px solid var(--border); background:var(--cream);
+    font-size:14px; color:var(--text); font-family:'DM Sans',sans-serif;
+    transition:all 0.2s; outline:none;
+  }
+  .form-group input:focus, .form-group select:focus { border-color:var(--teal); box-shadow:0 0 0 3px rgba(26,140,122,0.1); }
+  .form-group .input-wrap { position:relative; }
+  .form-group .input-icon { position:absolute; right:12px; top:50%; transform:translateY(-50%); color:var(--text-light); cursor:pointer; }
+
+  .security-note {
+    display:flex; align-items:center; gap:8px; margin-bottom:16px;
+    background:rgba(26,140,122,0.08); border-radius:8px; padding:8px 12px;
+    font-size:11px; color:var(--teal); font-weight:500;
+  }
+  .btn-login-card {
+    width:100%; padding:13px; border-radius:10px; border:none;
+    font-size:14px; font-weight:700; cursor:pointer; transition:all 0.3s;
+    font-family:'DM Sans',sans-serif; color:var(--white);
+  }
+  .btn-login-card:hover { transform:translateY(-1px); }
+  .lc-footer { text-align:center; margin-top:14px; font-size:12px; color:var(--text-light); }
+  .lc-footer a { color:var(--teal); text-decoration:none; font-weight:600; }
+
+  /* ========= NOTIFICATIONS ========= */
+  #notifications { background:linear-gradient(135deg, var(--teal) 0%, #0f6b5a 100%); }
+  .notif-section-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .notif-section-grid .section-title { color:var(--white); }
+  .notif-section-grid .section-desc { color:rgba(255,255,255,0.7); }
+  .notif-features { display:grid; gap:16px; margin-top:32px; }
+  .nf-feature {
+    display:flex; gap:16px; align-items:center; padding:16px 20px;
+    background:rgba(255,255,255,0.1); border-radius:14px;
+    border:1px solid rgba(255,255,255,0.15); backdrop-filter:blur(10px);
+  }
+  .nf-feature .nff-icon { font-size:28px; flex-shrink:0; }
+  .nf-feature h4 { color:var(--white); font-size:14px; font-weight:700; margin-bottom:3px; }
+  .nf-feature p { color:rgba(255,255,255,0.6); font-size:12px; line-height:1.5; }
+
+  .phone-mockup {
+    max-width:280px; margin:0 auto;
+    background:var(--navy); border-radius:40px; padding:14px;
+    box-shadow:0 40px 80px rgba(0,0,0,0.3);
+    border:3px solid rgba(255,255,255,0.15);
+  }
+  .phone-screen {
+    background:#f0f0f0; border-radius:30px; overflow:hidden; padding:20px 16px;
+    min-height:500px;
+  }
+  .phone-status { display:flex; justify-content:space-between; margin-bottom:16px; font-size:10px; color:#333; font-family:'Space Mono',monospace; font-weight:700; }
+  .phone-app-header { text-align:center; margin-bottom:20px; }
+  .phone-app-header .app-logo { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--teal); }
+  .phone-app-header .app-time { font-size:28px; font-weight:700; color:#1a1a1a; margin-top:4px; }
+  .push-notifs { display:flex; flex-direction:column; gap:8px; }
+  .push-notif {
+    background:var(--white); border-radius:14px; padding:12px 14px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.1);
+  }
+  .push-notif .pn-app { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--teal); margin-bottom:4px; display:flex; align-items:center; gap:6px; }
+  .push-notif .pn-title { font-size:12px; font-weight:700; color:#1a1a1a; margin-bottom:2px; }
+  .push-notif .pn-body { font-size:11px; color:#555; line-height:1.4; }
+  .push-notif .pn-time { font-size:9px; color:#999; margin-top:6px; font-family:'Space Mono',monospace; }
+  .pn-app .pn-dot { width:6px; height:6px; border-radius:50%; background:var(--teal); }
+
+  /* ========= SECURITY ========= */
+  #security { background:var(--cream); }
+  .security-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .security-shields { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px; }
+  .shield-item {
+    background:var(--white); border-radius:14px; padding:20px;
+    border:1px solid var(--border); text-align:center; transition:all 0.3s;
+  }
+  .shield-item:hover { border-color:var(--navy); box-shadow:var(--shadow); }
+  .shield-icon { font-size:28px; margin-bottom:10px; }
+  .shield-item h4 { font-size:13px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+  .shield-item p { font-size:11px; color:var(--text-light); line-height:1.5; }
+
+  .owasp-list { display:flex; flex-direction:column; gap:10px; }
+  .owasp-item {
+    display:flex; align-items:center; gap:14px; padding:12px 16px;
+    background:var(--white); border-radius:10px; border:1px solid var(--border);
+  }
+  .owasp-num { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--text-light); width:28px; flex-shrink:0; }
+  .owasp-item strong { font-size:13px; color:var(--navy); }
+  .owasp-item span { font-size:12px; color:var(--text-light); margin-left:auto; }
+  .owasp-tick { color:var(--success); font-size:14px; }
+
+  /* ========= TESTIMONIALS ========= */
+  #testimonials { background:var(--navy); }
+  .test-header { text-align:center; max-width:500px; margin:0 auto 50px; }
+  .test-header .section-title { color:var(--white); }
+  .test-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .test-card {
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);
+    border-radius:20px; padding:28px; transition:all 0.3s;
+  }
+  .test-card:hover { background:rgba(255,255,255,0.08); transform:translateY(-4px); }
+  .test-stars { display:flex; gap:3px; margin-bottom:16px; }
+  .test-star { color:var(--gold); font-size:14px; }
+  .test-quote { color:rgba(255,255,255,0.75); font-size:14px; line-height:1.7; margin-bottom:20px; font-style:italic; }
+  .test-author { display:flex; align-items:center; gap:12px; }
+  .test-avatar { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .test-author-info .ta-name { color:var(--white); font-size:14px; font-weight:700; }
+  .test-author-info .ta-role { color:var(--gold); font-size:11px; font-family:'Space Mono',monospace; }
+
+  /* ========= ENROLLMENT CTA ========= */
+  #enroll { background:linear-gradient(135deg, #0a1628 0%, #1a3a6b 50%, #0a1628 100%); text-align:center; padding:120px 40px; position:relative; overflow:hidden; }
+  #enroll::before {
+    content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:600px; height:600px; border-radius:50%;
+    background:radial-gradient(circle, rgba(232,160,32,0.12) 0%, transparent 70%);
+  }
+  .enroll-content { position:relative; z-index:2; max-width:600px; margin:0 auto; }
+  .enroll-content .section-title { color:var(--white); font-size:clamp(36px,4vw,56px); margin-bottom:20px; }
+  .enroll-content p { color:rgba(255,255,255,0.65); font-size:16px; line-height:1.7; margin-bottom:40px; }
+  .enroll-form {
+    display:flex; gap:12px; max-width:460px; margin:0 auto 20px;
+  }
+  .enroll-form input {
+    flex:1; padding:14px 20px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.1); color:var(--white); font-size:14px;
+    font-family:'DM Sans',sans-serif; outline:none;
+  }
+  .enroll-form input::placeholder { color:rgba(255,255,255,0.4); }
+  .enroll-form input:focus { border-color:var(--gold); }
+  .enroll-note { color:rgba(255,255,255,0.4); font-size:12px; margin-top:12px; }
+
+  /* ========= FOOTER ========= */
+  footer {
+    background:var(--navy); border-top:1px solid rgba(255,255,255,0.08);
+    padding:60px 40px 30px;
+  }
+  .footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+  .footer-brand .logo-text { font-size:20px; color:var(--white); display:block; margin-bottom:4px; font-family:'Playfair Display',serif; font-weight:700; }
+  .footer-brand .logo-sub { color:var(--gold); font-size:10px; letter-spacing:2px; text-transform:uppercase; font-family:'Space Mono',monospace; }
+  .footer-brand p { color:rgba(255,255,255,0.45); font-size:13px; line-height:1.7; margin-top:14px; max-width:260px; }
+  .footer-social { display:flex; gap:10px; margin-top:20px; }
+  .social-btn { width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; font-size:16px; cursor:pointer; transition:all 0.2s; border:none; }
+  .social-btn:hover { background:rgba(232,160,32,0.2); }
+
+  .footer-col h4 { color:var(--white); font-size:13px; font-weight:700; margin-bottom:16px; text-transform:uppercase; letter-spacing:1px; font-family:'Space Mono',monospace; }
+  .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .footer-col ul li a { color:rgba(255,255,255,0.45); text-decoration:none; font-size:13px; transition:color 0.2s; }
+  .footer-col ul li a:hover { color:var(--gold); }
+
+  .footer-bottom { max-width:1200px; margin:0 auto; padding-top:24px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; }
+  .footer-bottom p { color:rgba(255,255,255,0.3); font-size:12px; }
+  .footer-bottom .cert-badges { display:flex; gap:8px; }
+  .cert-badge { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:4px 10px; border-radius:6px; font-size:10px; color:rgba(255,255,255,0.4); font-family:'Space Mono',monospace; }
+
+  /* ========= MODAL ========= */
+  .modal-overlay {
+    position:fixed; inset:0; z-index:2000;
+    background:rgba(10,22,40,0.85); backdrop-filter:blur(8px);
+    display:none; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.open { display:flex; }
+  .modal {
+    background:var(--white); border-radius:24px; max-width:500px; width:100%;
+    box-shadow:0 40px 80px rgba(0,0,0,0.4); animation:modalIn 0.3s ease;
+  }
+  @keyframes modalIn { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
+  .modal-header { background:var(--navy); border-radius:24px 24px 0 0; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; }
+  .modal-header h3 { color:var(--white); font-family:'Playfair Display',serif; font-size:20px; font-weight:700; }
+  .modal-close { background:rgba(255,255,255,0.1); border:none; color:var(--white); width:32px; height:32px; border-radius:8px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; }
+  .modal-body { padding:28px 32px; }
+  .modal-success { text-align:center; padding:40px; }
+  .modal-success .success-icon { font-size:56px; margin-bottom:16px; display:block; }
+  .modal-success h3 { font-family:'Playfair Display',serif; font-size:24px; color:var(--navy); margin-bottom:8px; }
+  .modal-success p { color:var(--text-light); font-size:14px; line-height:1.6; }
+
+  /* ========= TOAST ========= */
+  .toast-container { position:fixed; bottom:24px; right:24px; z-index:3000; display:flex; flex-direction:column; gap:10px; }
+  .toast {
+    background:var(--navy); color:var(--white); padding:14px 20px; border-radius:12px;
+    font-size:13px; font-weight:500; max-width:300px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.3); display:flex; align-items:center; gap:10px;
+    animation:toastIn 0.3s ease; border-left:3px solid var(--gold);
+  }
+  @keyframes toastIn { from{transform:translateX(100%);opacity:0} to{transform:translateX(0);opacity:1} }
+  .toast.success { border-left-color:var(--success); }
+  .toast.info { border-left-color:var(--teal); }
+
+  /* ========= SCROLL REVEAL ========= */
+  .reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* ========= RESPONSIVE ========= */
+  @media (max-width: 900px) {
+    nav { padding:0 20px; }
+    .nav-links { display:none; }
+    .hero-content { grid-template-columns:1fr; }
+    .hero-visual { display:none; }
+    .why-grid, .portal-content.active, .notif-section-grid, .security-grid { grid-template-columns:1fr; }
+    .adv-grid { grid-template-columns:1fr 1fr; }
+    .login-grid { grid-template-columns:1fr; }
+    .test-grid { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    section { padding:60px 20px; }
+    .adv-grid { grid-template-columns:1fr; }
+    .enroll-form { flex-direction:column; }
+    .hero-stats { flex-wrap:wrap; gap:20px; }
+    .progress-cards { grid-template-columns:1fr; }
+  }
+
+  /* ========= BUS TRACKER WIDGET ========= */
+  .bus-widget {
+    background:linear-gradient(135deg, var(--navy) 0%, #1a3a6b 100%);
+    border-radius:20px; padding:24px; margin-top:20px;
+    border:1px solid rgba(255,255,255,0.1);
+  }
+  .bus-widget h4 { color:var(--white); font-size:14px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+  .bus-route { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .bus-icon { font-size:24px; }
+  .bus-info .bi-route { color:var(--gold); font-size:12px; font-weight:700; font-family:'Space Mono',monospace; }
+  .bus-info .bi-eta { color:rgba(255,255,255,0.65); font-size:11px; }
+  .bus-progress { flex:1; height:6px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden; margin-left:auto; max-width:80px; }
+  .bus-progress-fill { height:100%; background:linear-gradient(90deg,var(--teal),var(--gold)); border-radius:3px; animation:busMove 3s infinite; }
+  @keyframes busMove { 0%{width:30%} 50%{width:70%} 100%{width:30%} }
+
+  /* Active nav link highlight */
+  .scrolled nav { box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+</style>
+</head>
+<body>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">🎓 Parent Portal Login</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="security-note">🔒 256-bit SSL Encrypted • OWASP Secured Connection</div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <div class="input-wrap">
+          <input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="off">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <div class="input-wrap">
+          <input type="password" id="loginPass" placeholder="••••••••">
+          <span class="input-icon" onclick="togglePass()">👁</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Two-Factor Code (MFA)</label>
+        <input type="text" placeholder="6-digit code" maxlength="6" id="mfaCode">
+      </div>
+      <button class="btn-login-card" id="modalLoginBtn" style="background:linear-gradient(135deg,var(--navy),#1a3a6b)" onclick="handleLogin()">
+        Sign In Securely →
+      </button>
+      <div class="lc-footer" style="margin-top:16px">
+        <a href="#" onclick="showReset()">Forgot password?</a> &nbsp;·&nbsp; <a href="#enroll">Request Access</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ENROLLMENT MODAL -->
+<div class="modal-overlay" id="enrollModal">
+  <div class="modal">
+    <div class="modal-header" style="background:linear-gradient(135deg,var(--teal),#0f6b5a)">
+      <h3>📝 Enroll Your Child</h3>
+      <button class="modal-close" onclick="closeModal2()">✕</button>
+    </div>
+    <div class="modal-body" id="enrollBody">
+      <div class="form-group"><label>Parent / Guardian Full Name</label><input type="text" placeholder="e.g. Jane Smith"></div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+1 (555) 000-0000"></div>
+      <div class="form-group"><label>Child's Full Name</label><input type="text" placeholder="e.g. Alex Smith"></div>
+      <div class="form-group"><label>Grade Applying For</label>
+        <select>
+          <option>-- Select Grade --</option>
+          <option>Kindergarten</option>
+          <option>Grade 1</option><option>Grade 2</option><option>Grade 3</option>
+          <option>Grade 4</option><option>Grade 5</option><option>Grade 6</option>
+          <option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
+          <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+        </select>
+      </div>
+      <div class="form-group"><label>How did you hear about us?</label>
+        <select><option>Search Engine</option><option>Social Media</option><option>Friend / Family</option><option>Local Advertisement</option><option>Open Day</option></select>
+      </div>
+      <button class="btn-login-card" style="background:linear-gradient(135deg,var(--teal),#0f6b5a)" onclick="handleEnroll()">Submit Enrollment Application →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="logo-emblem">L</div>
+    <div>
+      <div class="logo-text">Luminary Academy</div>
+      <div class="logo-sub">Excellence Since 1998</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#why">About</a>
+    <a href="#advantages">Programs</a>
+    <a href="#portals">Portals</a>
+    <a href="#notifications">Connect</a>
+    <a href="#security">Security</a>
+    <a href="#enroll">Admissions</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-nav btn-login" onclick="openLoginModal('parent')">Sign In</button>
+    <button class="btn-nav btn-enroll" onclick="document.getElementById('enrollModal').classList.add('open')">Enroll Now</button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge"><span></span>Enrollments Open for 2025–2026</div>
+      <h1 class="hero-title">Where Every Child's <em>Future</em> Begins</h1>
+      <p class="hero-desc">Luminary Academy offers a world-class education that nurtures curiosity, builds character, and prepares students for tomorrow's challenges — all within a safe, connected, and thriving community.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('enrollModal').classList.add('open')">🎓 Enroll Your Child</button>
+        <a href="#why" class="btn-secondary">Discover More →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">University Placement</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">2,400+</div>
+          <div class="stat-label">Students Enrolled</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">150+</div>
+          <div class="stat-label">Expert Educators</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">26yr</div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hero-card hc1">
+          <div class="hc-title">📊 Live Progress Dashboard</div>
+          <div class="hc-row">
+            <div class="hc-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">👦</div>
+            <div class="hc-info"><div class="name">Alex Johnson</div><div class="sub">Grade 8 · Mathematics</div></div>
+            <div class="hc-grade">A+</div>
+          </div>
+          <div class="hc-row">
+            <div class="hc-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">👧</div>
+            <div class="hc-info"><div class="name">Maya Patel</div><div class="sub">Grade 6 · Science</div></div>
+            <div class="hc-grade b">B+</div>
+          </div>
+        </div>
+        <div class="hero-card hc2">
+          <div class="hc-title">🚌 Bus Tracker — Live</div>
+          <div class="notif-pill">
+            <span class="notif-icon">🚌</span>
+            <div class="notif-text">
+              <div class="t1">Route 7 · On Schedule</div>
+              <div class="t2">Arriving Maple Ave in 8 min</div>
+            </div>
+            <span class="notif-time">3:42 PM</span>
+          </div>
+          <div class="notif-pill">
+            <span class="notif-icon">📱</span>
+            <div class="notif-text">
+              <div class="t1">Assignment Posted</div>
+              <div class="t2">Math Chapter 5 due Friday</div>
+            </div>
+            <span class="notif-time">2:15 PM</span>
+          </div>
+        </div>
+        <div class="hero-card hc3">
+          <div class="hc-title">🏆 Recent Achievement</div>
+          <div class="notif-pill">
+            <span class="notif-icon">🥇</span>
+            <div class="notif-text">
+              <div class="t1">Alex scored 97% on Term Exam</div>
+              <div class="t2">Top 5% of Grade 8</div>
+            </div>
+            <span class="notif-time">Today</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY LUMINARY ===== -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <div class="section-label">Why Choose Us</div>
+        <h2 class="section-title">A School That Goes Beyond Education</h2>
+        <p class="section-desc">We don't just teach curriculum — we develop future leaders, critical thinkers, and compassionate human beings ready to thrive in a complex world.</p>
+        <div class="why-features" style="margin-top:32px">
+          <div class="why-feature reveal">
+            <div class="feat-icon" style="background:rgba(26,140,122,0.12)">🧠</div>
+            <div class="feat-body">
+              <h3>Holistic Learning Approach</h3>
+              <p>Blending STEM excellence with arts, sports, and character development for a truly complete education.</p>
+            </div>
+          </div>
+          <div class="why-feature reveal">
+            <div class="feat-icon" style="background:rgba(232,160,32,0.12)">📱</div>
+            <div class="feat-body">
+              <h3>Smart Digital Platform</h3>
+              <p>Our award-winning app keeps parents informed with real-time grades, bus tracking, and instant notifications.</p>
+            </div>
+          </div>
+          <div class="why-feature reveal">
+            <div class="feat-icon" style="background:rgba(124,111,205,0.12)">🏛️</div>
+            <div class="feat-body">
+              <h3>World-Class Facilities</h3>
+              <p>State-of-the-art labs, libraries, sports complexes, and performing arts centers across our campus.</p>
+            </div>
+          </div>
+          <div class="why-feature reveal">
+            <div class="feat-icon" style="background:rgba(224,90,58,0.12)">👨‍👩‍👧‍👦</div>
+            <div class="feat-body">
+              <h3>Family Partnership Model</h3>
+              <p>We believe parents are co-educators. Our portals and communication tools make collaboration effortless.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-image-area">
+        <div class="wi-main">
+          <div class="wi-photo-placeholder">🏫</div>
+          <div class="wi-caption">
+            <div class="cap-title">Luminary Main Campus</div>
+            <div class="cap-sub">120-acre campus with 48 specialized learning spaces</div>
+          </div>
+        </div>
+        <div class="wi-badge">
+          <div class="badge-num">#1</div>
+          <div class="badge-label">Ranked District School<br>3 Years Running</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ADVANTAGES ===== -->
+<section id="advantages">
+  <div class="container">
+    <div class="adv-header reveal">
+      <div class="section-label" style="color:var(--gold)">What Students Gain</div>
+      <h2 class="section-title">Programs Built for Tomorrow's World</h2>
+      <p class="section-desc" style="margin:0 auto">Every program at Luminary Academy is designed with purpose — preparing students academically, socially, and emotionally.</p>
+    </div>
+    <div class="adv-grid">
+      <div class="adv-card reveal">
+        <div class="adv-icon">🎓</div>
+        <h3>Academic Excellence</h3>
+        <p>Rigorous, internationally-aligned curriculum with personalized learning plans for every student. Advanced Placement and honors tracks available from Grade 9.</p>
+        <span class="adv-tag">AP • IB Prep • Honors</span>
+      </div>
+      <div class="adv-card reveal">
+        <div class="adv-icon">💻</div>
+        <h3>STEM Innovation Lab</h3>
+        <p>Coding, robotics, AI fundamentals, and engineering challenges in our 5,000 sq ft innovation center with industry-grade tools and mentors.</p>
+        <span class="adv-tag">Robotics • AI • Coding</span>
+      </div>
+      <div class="adv-card reveal">
+        <div class="adv-icon">🎨</div>
+        <h3>Arts & Creative Expression</h3>
+        <p>Music, visual arts, drama, and film production programs foster creativity and emotional intelligence alongside analytical skills.</p>
+        <span class="adv-tag">Music • Drama • Visual Arts</span>
+      </div>
+      <div class="adv-card reveal">
+        <div class="adv-icon">⚽</div>
+        <h3>Athletics & Wellbeing</h3>
+        <p>Olympic-standard sports facilities, certified coaches, and a comprehensive wellness program covering mental and physical health.</p>
+        <span class="adv-tag">20+ Sports • Wellness • PE</span>
+      </div>
+      <div class="adv-card reveal">
+        <div class="adv-icon">🌍</div>
+        <h3>Global Citizenship</h3>
+        <p>Model UN, international exchange programs, 8 languages offered, and cultural immersion experiences across 30+ partner countries.</p>
+        <span class="adv-tag">Languages • Exchange • MUN</span>
+      </div>
+      <div class="adv-card reveal">
+        <div class="adv-icon">🤝</div>
+        <h3>Leadership & Character</h3>
+        <p>Student council, mentorship circles, community service mandates, and emotional intelligence workshops built into the curriculum.</p>
+        <span class="adv-tag">EQ • Mentorship • Service</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTALS ===== -->
+<section id="portals">
+  <div class="container">
+    <div class="section-label">Digital Portals</div>
+    <h2 class="section-title">One Platform for the Whole School Community</h2>
+    <p class="section-desc">Purpose-built portals for parents, teachers, and students — all connected and secured in one intelligent ecosystem.</p>
+
+    <div class="portals-tabs" style="margin-top:36px">
+      <button class="portal-tab active" onclick="switchPortal('parent', this)">👨‍👩‍👧 Parent Portal</button>
+      <button class="portal-tab" onclick="switchPortal('teacher', this)">👩‍🏫 Teacher Portal</button>
+      <button class="portal-tab" onclick="switchPortal('student', this)">🎒 Student Portal</button>
+    </div>
+
+    <!-- PARENT PORTAL -->
+    <div class="portal-content active" id="portal-parent">
+      <div class="portal-info">
+        <h3>Stay Connected to Your Child's Journey</h3>
+        <p>The Parent Portal gives you a real-time window into your child's academic performance, attendance, school events, and daily updates — all from your phone.</p>
+        <ul class="portal-features">
+          <li><span class="pf-icon">📊</span><div><strong>Live Grade Tracking</strong> — View subject grades, exam results, and academic trends</div></li>
+          <li><span class="pf-icon">📋</span><div><strong>Progress Reports</strong> — Access current and all historical term reports</div></li>
+          <li><span class="pf-icon">📅</span><div><strong>Attendance Calendar</strong> — See daily attendance with reason codes</div></li>
+          <li><span class="pf-icon">🚌</span><div><strong>Bus Tracker</strong> — Real-time GPS tracking & arrival notifications</div></li>
+          <li><span class="pf-icon">💬</span><div><strong>Teacher Messaging</strong> — Direct, encrypted communication with teachers</div></li>
+          <li><span class="pf-icon">💰</span><div><strong>Fee Management</strong> — View invoices, pay fees, download receipts</div></li>
+          <li><span class="pf-icon">🔔</span><div><strong>Smart Notifications</strong> — Customise alerts for grades, events, and emergencies</div></li>
+        </ul>
+        <div style="margin-top:24px">
+          <button class="btn-primary" onclick="openLoginModal('parent')" style="font-size:14px;padding:12px 24px">Access Parent Portal →</button>
+        </div>
+      </div>
+      <div class="portal-mockup">
+        <div class="mockup-header">
+          <div class="mockup-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+          <div class="mockup-url">luminaryacademy.edu/parent</div>
+        </div>
+        <div class="mockup-body">
+          <div class="portal-dash-header">
+            <h4>👋 Welcome, Sarah</h4>
+            <span>Wednesday, March 2026</span>
+          </div>
+          <div class="child-selector">
+            <div class="child-chip selected"><div class="ch-avatar" style="background:#667eea;color:white">👦</div>Alex · Gr.8</div>
+            <div class="child-chip"><div class="ch-avatar" style="background:#f093fb;color:white">👧</div>Lily · Gr.5</div>
+          </div>
+          <div class="progress-cards">
+            <div class="prog-card"><div class="pc-subject">Mathematics</div><div class="pc-grade">A+</div><div class="pc-bar"><div class="pc-fill" style="width:95%;background:var(--success)"></div></div></div>
+            <div class="prog-card"><div class="pc-subject">Science</div><div class="pc-grade">A</div><div class="pc-bar"><div class="pc-fill" style="width:88%;background:var(--teal)"></div></div></div>
+            <div class="prog-card"><div class="pc-subject">English</div><div class="pc-grade">B+</div><div class="pc-bar"><div class="pc-fill" style="width:82%;background:var(--lavender)"></div></div></div>
+            <div class="prog-card"><div class="pc-subject">History</div><div class="pc-grade">A-</div><div class="pc-bar"><div class="pc-fill" style="width:90%;background:var(--gold)"></div></div></div>
+          </div>
+          <div class="notif-feed">
+            <div class="nf-item"><span class="nf-icon">🚌</span><div class="nf-text"><div class="nf-t">Bus Route 7 — 8 min away</div><div class="nf-s">Estimated arrival: Maple Ave 3:52 PM</div></div><div class="nf-time">Now</div></div>
+            <div class="nf-item"><span class="nf-icon">📝</span><div class="nf-text"><div class="nf-t">New Exam Result Posted</div><div class="nf-s">Physics Mid-Term: 94/100 — Excellent!</div></div><div class="nf-time">1h ago</div></div>
+            <div class="nf-item"><span class="nf-icon">📅</span><div class="nf-text"><div class="nf-t">Parent-Teacher Meeting</div><div class="nf-s">Scheduled for Friday, March 7 at 2 PM</div></div><div class="nf-time">2h ago</div></div>
+          </div>
+          <div class="bus-widget">
+            <h4>🚌 Live Bus Tracker</h4>
+            <div class="bus-route">
+              <span class="bus-icon">🚌</span>
+              <div class="bus-info">
+                <div class="bi-route">ROUTE 7 — NORTHSIDE</div>
+                <div class="bi-eta">ETA: 8 minutes · 2.3km away</div>
+              </div>
+              <div class="bus-progress"><div class="bus-progress-fill"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEACHER PORTAL -->
+    <div class="portal-content" id="portal-teacher">
+      <div class="portal-info">
+        <h3>Powerful Tools for Modern Educators</h3>
+        <p>The Teacher Portal streamlines every aspect of classroom management — from posting assignments to analysing student performance data — so you can focus on what matters: teaching.</p>
+        <ul class="portal-features">
+          <li><span class="pf-icon">📤</span><div><strong>Post Assignments</strong> — Create, schedule, and distribute homework and projects</div></li>
+          <li><span class="pf-icon">✅</span><div><strong>Online Grading</strong> — Grade submissions with rubrics, comments, and scores</div></li>
+          <li><span class="pf-icon">📈</span><div><strong>Class Analytics</strong> — Visual dashboards of class and individual performance</div></li>
+          <li><span class="pf-icon">📚</span><div><strong>Resource Library</strong> — Upload lesson materials, videos, and reading resources</div></li>
+          <li><span class="pf-icon">🗓️</span><div><strong>Timetable Management</strong> — Manage schedules and room bookings</div></li>
+          <li><span class="pf-icon">📣</span><div><strong>Class Announcements</strong> — Push instant alerts to students and parents</div></li>
+          <li><span class="pf-icon">🤝</span><div><strong>Parent Communication</strong> — Secure messaging and meeting scheduling</div></li>
+        </ul>
+        <div style="margin-top:24px">
+          <button class="btn-primary" onclick="openLoginModal('teacher')" style="font-size:14px;padding:12px 24px;background:linear-gradient(135deg,var(--teal),#0f6b5a)">Access Teacher Portal →</button>
+        </div>
+      </div>
+      <div class="portal-mockup">
+        <div class="mockup-header">
+          <div class="mockup-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+          <div class="mockup-url">luminaryacademy.edu/teacher</div>
+        </div>
+        <div class="mockup-body">
+          <div class="portal-dash-header">
+            <h4>👩‍🏫 Ms. Rodriguez · Math</h4>
+            <span>Grade 8A • 28 students</span>
+          </div>
+          <div class="assign-list">
+            <div style="font-size:12px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Recent Assignments</div>
+            <div class="assign-item"><span class="ai-icon">📐</span><div class="ai-info"><div class="ai-title">Algebra Chapter 5 Quiz</div><div class="ai-sub">Due: March 6 · 28 submitted</div></div><span class="ai-badge badge-graded">Graded</span></div>
+            <div class="assign-item"><span class="ai-icon">📊</span><div class="ai-info"><div class="ai-title">Statistics Project</div><div class="ai-sub">Due: March 10 · 14 submitted</div></div><span class="ai-badge badge-pending">Pending</span></div>
+            <div class="assign-item"><span class="ai-icon">📝</span><div class="ai-info"><div class="ai-title">Geometry Worksheet 7</div><div class="ai-sub">Due: March 14 · Posted today</div></div><span class="ai-badge badge-new">New</span></div>
+          </div>
+          <button class="post-btn" onclick="showToast('✏️ Assignment editor opening...','info')">+ Post New Assignment or Resource</button>
+          <div style="margin-top:16px">
+            <div style="font-size:12px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Class 8A — Online Now</div>
+            <div class="class-roster">
+              <div class="roster-chip"><span class="rc-dot"></span>Alex J.</div>
+              <div class="roster-chip"><span class="rc-dot"></span>Maya P.</div>
+              <div class="roster-chip"><span class="rc-dot"></span>Sam K.</div>
+              <div class="roster-chip" style="--success:#f39c12"><span class="rc-dot" style="background:#f39c12"></span>Jordan L.</div>
+              <div class="roster-chip"><span class="rc-dot"></span>Priya S.</div>
+              <div class="roster-chip"><span class="rc-dot"></span>Ethan M.</div>
+              <div style="font-size:11px;color:var(--text-light);padding:5px 12px">+22 more</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT PORTAL -->
+    <div class="portal-content" id="portal-student">
+      <div class="portal-info">
+        <h3>Your Learning Hub, Always Ready</h3>
+        <p>The Student Portal is where learning happens beyond the classroom — an engaging, gamified space for homework, study materials, quizzes, and connecting with teachers.</p>
+        <ul class="portal-features">
+          <li><span class="pf-icon">📚</span><div><strong>Homework Hub</strong> — Submit assignments, track due dates, get reminders</div></li>
+          <li><span class="pf-icon">🎮</span><div><strong>Gamified Learning</strong> — Earn XP, badges, and leaderboard spots for completing work</div></li>
+          <li><span class="pf-icon">📖</span><div><strong>E-Library Access</strong> — 10,000+ digital books, journals, and study resources</div></li>
+          <li><span class="pf-icon">🧪</span><div><strong>Practice Quizzes</strong> — AI-generated practice tests tailored to your weak areas</div></li>
+          <li><span class="pf-icon">💬</span><div><strong>Study Groups</strong> — Collaborate with classmates in secure virtual rooms</div></li>
+          <li><span class="pf-icon">🗓️</span><div><strong>My Timetable</strong> — Personal schedule with lesson reminders and room numbers</div></li>
+          <li><span class="pf-icon">📊</span><div><strong>My Progress</strong> — View grades, teacher feedback, and achievement history</div></li>
+        </ul>
+        <div style="margin-top:24px">
+          <button class="btn-primary" onclick="openLoginModal('student')" style="font-size:14px;padding:12px 24px;background:linear-gradient(135deg,var(--lavender),#5a50a0)">Access Student Portal →</button>
+        </div>
+      </div>
+      <div class="portal-mockup">
+        <div class="mockup-header">
+          <div class="mockup-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+          <div class="mockup-url">luminaryacademy.edu/student</div>
+        </div>
+        <div class="mockup-body">
+          <div class="student-hello">
+            <div class="sh-greeting">Good afternoon 👋</div>
+            <div class="sh-name">Alex Johnson · Grade 8A</div>
+          </div>
+          <div class="xp-bar-area">
+            <div class="xp-label"><span>🏆 Level 12 Scholar</span><strong>670 / 1000 XP</strong></div>
+            <div class="xp-bar"><div class="xp-fill"></div></div>
+          </div>
+          <div style="margin:16px 0 10px;font-size:12px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px">Today's Homework (3 tasks)</div>
+          <div class="hw-list">
+            <div class="hw-item done" onclick="toggleHW(this)">
+              <div class="hw-checkbox">✓</div>
+              <div class="hw-info"><div class="hw-title">Math — Algebra Worksheet</div><div class="hw-due">Due today · Submitted ✓</div></div>
+              <div class="hw-pts" style="color:var(--success)">+50 XP</div>
+            </div>
+            <div class="hw-item" onclick="toggleHW(this)">
+              <div class="hw-checkbox"></div>
+              <div class="hw-info"><div class="hw-title">Science — Lab Report Write-up</div><div class="hw-due">Due tomorrow · Not started</div></div>
+              <div class="hw-pts">+75 XP</div>
+            </div>
+            <div class="hw-item" onclick="toggleHW(this)">
+              <div class="hw-checkbox"></div>
+              <div class="hw-info"><div class="hw-title">English — Essay Outline</div><div class="hw-due">Due Friday · In progress</div></div>
+              <div class="hw-pts">+60 XP</div>
+            </div>
+          </div>
+          <div style="margin-top:16px;display:flex;gap:8px;">
+            <button style="flex:1;padding:10px;background:linear-gradient(135deg,var(--lavender),#5a50a0);color:white;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" onclick="showToast('📖 Opening E-Library...','info')">📖 E-Library</button>
+            <button style="flex:1;padding:10px;background:linear-gradient(135deg,var(--teal),#0f6b5a);color:white;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif" onclick="showToast('🧪 Generating practice quiz...','info')">🧪 Practice Quiz</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NOTIFICATIONS ===== -->
+<section id="notifications">
+  <div class="container">
+    <div class="notif-section-grid">
+      <div>
+        <div class="section-label" style="color:rgba(255,255,255,0.6)">Smart Notifications</div>
+        <h2 class="section-title">Always Informed, Never Overwhelmed</h2>
+        <p class="section-desc">Luminary Academy's smart notification system keeps families connected — sending the right information to the right person at exactly the right time.</p>
+        <div class="notif-features">
+          <div class="nf-feature reveal">
+            <span class="nff-icon">🚌</span>
+            <div>
+              <h4>Live Bus Tracking & Alerts</h4>
+              <p>Real-time GPS tracking with arrival notifications. Know exactly when your child's bus will pick up or drop off — before it happens.</p>
+            </div>
+          </div>
+          <div class="nf-feature reveal">
+            <span class="nff-icon">📊</span>
+            <div>
+              <h4>Instant Grade & Exam Alerts</h4>
+              <p>Receive immediate push notifications when new grades, exam results, or teacher feedback are posted for your child.</p>
+            </div>
+          </div>
+          <div class="nf-feature reveal">
+            <span class="nff-icon">📅</span>
+            <div>
+              <h4>Event & Meeting Reminders</h4>
+              <p>Automated reminders for sports days, parent evenings, school plays, and assignment deadlines — never miss a moment.</p>
+            </div>
+          </div>
+          <div class="nf-feature reveal">
+            <span class="nff-icon">🚨</span>
+            <div>
+              <h4>Emergency & Safety Alerts</h4>
+              <p>Instant school-wide notifications for weather closures, safety incidents, and emergency communications with geo-targeting.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="phone-status"><span>9:41</span><span>📶 🔋</span></div>
+            <div class="phone-app-header">
+              <div class="app-logo">Luminary Academy</div>
+              <div class="app-time">3:44 PM</div>
+            </div>
+            <div class="push-notifs">
+              <div class="push-notif">
+                <div class="pn-app"><span class="pn-dot"></span>LUMINARY ACADEMY</div>
+                <div class="pn-title">🚌 Bus Route 7 — 5 minutes away!</div>
+                <div class="pn-body">Alex's bus is approaching Maple Avenue. Expected arrival: 3:49 PM</div>
+                <div class="pn-time">just now</div>
+              </div>
+              <div class="push-notif">
+                <div class="pn-app"><span class="pn-dot"></span>LUMINARY ACADEMY</div>
+                <div class="pn-title">🏆 New Exam Result — Physics</div>
+                <div class="pn-body">Alex scored 94/100 on the Physics Mid-Term. Rank: 3rd in class!</div>
+                <div class="pn-time">2 hours ago</div>
+              </div>
+              <div class="push-notif">
+                <div class="pn-app"><span class="pn-dot"></span>LUMINARY ACADEMY</div>
+                <div class="pn-title">📝 Assignment Due Tomorrow</div>
+                <div class="pn-body">Science Lab Report is due Friday at 8:00 AM. Alex has not submitted yet.</div>
+                <div class="pn-time">5 hours ago</div>
+              </div>
+              <div class="push-notif">
+                <div class="pn-app"><span class="pn-dot"></span>LUMINARY ACADEMY</div>
+                <div class="pn-title">📅 Reminder: Parent-Teacher Evening</div>
+                <div class="pn-body">Your meeting with Ms. Rodriguez is tomorrow at 2:00 PM in Room 14B.</div>
+                <div class="pn-time">Yesterday</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECURITY ===== -->
+<section id="security">
+  <div class="container">
+    <div class="security-grid">
+      <div>
+        <div class="section-label">OWASP Top 10 Protected</div>
+        <h2 class="section-title">Security You Can Trust With Your Family's Data</h2>
+        <p class="section-desc">Every portal is built with enterprise-grade security protecting students, parents, and staff against the top 10 most critical web vulnerabilities.</p>
+        <div class="security-shields">
+          <div class="shield-item reveal">
+            <div class="shield-icon">🔐</div>
+            <h4>AES-256 Encryption</h4>
+            <p>All data encrypted at rest and in transit with military-grade standards</p>
+          </div>
+          <div class="shield-item reveal">
+            <div class="shield-icon">🛡️</div>
+            <h4>Multi-Factor Auth</h4>
+            <p>TOTP-based MFA required for all portal access across all user roles</p>
+          </div>
+          <div class="shield-item reveal">
+            <div class="shield-icon">🔒</div>
+            <h4>Zero Trust Architecture</h4>
+            <p>Every request verified, no implicit trust — even within the network</p>
+          </div>
+          <div class="shield-item reveal">
+            <div class="shield-icon">📋</div>
+            <h4>COPPA & FERPA Compliant</h4>
+            <p>Full compliance with student data protection laws and regulations</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="background:var(--white);border-radius:20px;padding:28px;box-shadow:var(--shadow);border:1px solid var(--border)">
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px">🛡️ OWASP Top 10 Protection Status</div>
+          <div style="font-size:12px;color:var(--text-light);margin-bottom:20px">All vulnerabilities actively monitored & mitigated</div>
+          <div class="owasp-list">
+            <div class="owasp-item"><span class="owasp-num">A01</span><strong>Broken Access Control</strong><span class="owasp-tick">✅ Protected</span></div>
+            <div class="owasp-item"><span class="owasp-num">A02</span><strong>Cryptographic Failures</strong><span class="owasp-tick">✅ Protected</span></div>
+            <div class="owasp-item"><span class="owasp-num">A03</span><strong>Injection Attacks</strong><span class="owasp-tick">✅ Protected</span></div>
+            <div class="owasp-item"><span class="owasp-num">A04</span><strong>Insecure Design</strong><span class="owasp-tick">✅ Protected</span></div>
+            <div class="owasp-item"><span class="owasp-num">A05</span><strong>Security Misconfiguration</strong><span class="owasp-tick">✅ Protected</span></div>
+            <div class="owasp-item"><span class="owasp-num">A06</span><strong>Vulnerable Components</strong><span class="owasp-tick">✅ Protected</span></div>
+            <div class="owasp-item"><span class="owasp-num">A07</span><strong>Auth & Session Failures</strong><span class="owasp-tick">✅ Protected</span></div>
+            <div class="owasp-item"><span class="owasp-num">A08</span><strong>Data Integrity Failures</strong><span class="owasp-tick">✅ Protected</span></div>
+            <div class="owasp-item"><span class="owasp-num">A09</span><strong>Security Logging Failures</strong><span class="owasp-tick">✅ Protected</span></div>
+            <div class="owasp-item"><span class="owasp-num">A10</span><strong>SSRF Vulnerabilities</strong><span class="owasp-tick">✅ Protected</span></div>
+          </div>
+          <div style="margin-top:16px;background:rgba(46,204,113,0.08);border:1px solid rgba(46,204,113,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px">
+            <span style="font-size:20px">🟢</span>
+            <div style="font-size:12px;color:var(--text)"><strong>System Status: All Green</strong><br><span style="color:var(--text-light)">Last security audit: Feb 28, 2026 · Next: March 28</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="test-header reveal">
+      <div class="section-label" style="color:var(--gold)">What Our Community Says</div>
+      <h2 class="section-title">Trusted by Thousands of Families</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-stars">⭐⭐⭐⭐⭐</div>
+        <p class="test-quote">"The parent portal has completely transformed how involved I am in my son's education. I see his grades in real-time and the bus tracker gives me peace of mind every single day."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:rgba(232,160,32,0.2)">👩</div>
+          <div class="test-author-info"><div class="ta-name">Jennifer Clarke</div><div class="ta-role">Parent · Grade 7</div></div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars">⭐⭐⭐⭐⭐</div>
+        <p class="test-quote">"As a teacher, the portal saves me hours every week. Posting assignments, tracking submissions, and communicating with parents has never been this seamless and professional."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:rgba(26,140,122,0.2)">👨‍🏫</div>
+          <div class="test-author-info"><div class="ta-name">Mr. David Osei</div><div class="ta-role">Teacher · Science Dept.</div></div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars">⭐⭐⭐⭐⭐</div>
+        <p class="test-quote">"I actually enjoy doing homework now because I earn XP and badges. The gamified system makes me want to complete every assignment and beat my classmates on the leaderboard!"</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:rgba(124,111,205,0.2)">🧑‍🎓</div>
+          <div class="test-author-info"><div class="ta-name">Amara N.</div><div class="ta-role">Student · Grade 10</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ENROLLMENT CTA ===== -->
+<section id="enroll">
+  <div class="enroll-content">
+    <div class="section-label" style="color:var(--gold);text-align:center">Admissions 2025–2026</div>
+    <h2 class="section-title">Give Your Child the Education They Deserve</h2>
+    <p>Join over 2,400 students and their families who chose Luminary Academy — where exceptional teaching meets cutting-edge technology and genuine care for every child.</p>
+    <div class="enroll-form">
+      <input type="email" id="quickEmail" placeholder="Enter your email to get started">
+      <button class="btn-primary" onclick="quickEnroll()">Get Started →</button>
+    </div>
+    <div class="enroll-note">🔒 No spam, ever. We'll send you our admissions guide and schedule a campus tour.</div>
+    <div style="display:flex;gap:20px;justify-content:center;margin-top:36px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);font-size:13px">✅ Scholarships Available</div>
+      <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);font-size:13px">✅ Open Days Monthly</div>
+      <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);font-size:13px">✅ Flexible Payment Plans</div>
+      <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);font-size:13px">✅ Transport Provided</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-text">Luminary Academy</span>
+      <span class="logo-sub">Excellence Since 1998</span>
+      <p>Nurturing the next generation of leaders, innovators, and compassionate global citizens in a safe, connected, and thriving learning environment.</p>
+      <div class="footer-social">
+        <button class="social-btn">📘</button>
+        <button class="social-btn">📸</button>
+        <button class="social-btn">🐦</button>
+        <button class="social-btn">▶️</button>
+        <button class="social-btn">💼</button>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>School</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Leadership Team</a></li>
+        <li><a href="#">Campus Tour</a></li>
+        <li><a href="#">News & Events</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Portals</h4>
+      <ul>
+        <li><a href="#" onclick="openLoginModal('parent');return false">Parent Portal</a></li>
+        <li><a href="#" onclick="openLoginModal('teacher');return false">Teacher Portal</a></li>
+        <li><a href="#" onclick="openLoginModal('student');return false">Student Portal</a></li>
+        <li><a href="#">Admin Portal</a></li>
+        <li><a href="#">IT Support</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">📍 123 Academy Drive</a></li>
+        <li><a href="#">📞 +1 (555) 123-4567</a></li>
+        <li><a href="#">✉️ <span class="__cf_email__" data-cfemail="d6bfb8b0b996baa3bbbfb8b7a4aff8b3b2a3">[email&#160;protected]</span></a></li>
+        <li><a href="#">📅 Book a Tour</a></li>
+        <li><a href="#">🆘 Emergency Line</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Luminary Academy. All rights reserved. Built with care for every family.</p>
+    <div class="cert-badges">
+      <span class="cert-badge">SSL SECURED</span>
+      <span class="cert-badge">COPPA</span>
+      <span class="cert-badge">FERPA</span>
+      <span class="cert-badge">OWASP</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ===== PORTAL SWITCHING =====
+  function switchPortal(name, btn) {
+    document.querySelectorAll('.portal-content').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.portal-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('portal-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ===== LOGIN MODAL =====
+  const portalColors = {
+    parent: { gradient: 'linear-gradient(135deg,#0a1628,#1a3a6b)', label: '👨‍👩‍👧 Parent Portal Login', btn: '#0a1628' },
+    teacher: { gradient: 'linear-gradient(135deg,var(--teal),#0f6b5a)', label: '👩‍🏫 Teacher Portal Login', btn: '#1a8c7a' },
+    student: { gradient: 'linear-gradient(135deg,var(--lavender),#5a50a0)', label: '🎒 Student Portal Login', btn: '#7c6fcd' }
+  };
+
+  let currentPortal = 'parent';
+  function openLoginModal(type) {
+    currentPortal = type;
+    const cfg = portalColors[type];
+    document.getElementById('modalTitle').textContent = cfg.label;
+    document.getElementById('loginModal').classList.add('open');
+    document.getElementById('modalLoginBtn').style.background = cfg.gradient;
+    document.getElementById('modalBody').querySelector('.security-note') &&
+      (document.querySelector('#modalBody .security-note').innerHTML = '🔒 256-bit SSL Encrypted • OWASP Secured • MFA Required');
+  }
+
+  function closeModal() { document.getElementById('loginModal').classList.remove('open'); }
+  function closeModal2() { document.getElementById('enrollModal').classList.remove('open'); }
+
+  // Close on overlay click
+  document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.getElementById('enrollModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal2();
+  });
+
+  function togglePass() {
+    const p = document.getElementById('loginPass');
+    p.type = p.type === 'password' ? 'text' : 'password';
+  }
+
+  let loginAttempts = 0;
+  function handleLogin() {
+    const email = document.getElementById('loginEmail').value;
+    const pass = document.getElementById('loginPass').value;
+    const mfa = document.getElementById('mfaCode').value;
+
+    // OWASP: Input validation
+    if (!email || !pass) { showToast('⚠️ Please enter your email and password', 'warning'); return; }
+    if (!email.includes('@')) { showToast('⚠️ Please enter a valid email address', 'warning'); return; }
+    if (pass.length < 8) { showToast('⚠️ Password must be at least 8 characters', 'warning'); return; }
+
+    // OWASP: Brute force protection simulation
+    loginAttempts++;
+    if (loginAttempts > 3) {
+      showToast('🚫 Too many attempts. Account temporarily locked for security.', 'danger');
+      setTimeout(() => loginAttempts = 0, 5000);
+      return;
+    }
+
+    // Simulate MFA check
+    if (mfa && mfa.length !== 6) { showToast('⚠️ Please enter a valid 6-digit MFA code', 'warning'); return; }
+
+    showToast('🔐 Verifying credentials securely...', 'info');
+    setTimeout(() => {
+      closeModal();
+      const portalName = currentPortal.charAt(0).toUpperCase() + currentPortal.slice(1);
+      document.getElementById('modalBody').innerHTML = `
+        <div class="modal-success">
+          <span class="success-icon">✅</span>
+          <h3>Welcome to the ${portalName} Portal!</h3>
+          <p>Authentication successful. In a live deployment, you would now be securely redirected to your personalised dashboard.</p>
+        </div>`;
+      document.getElementById('loginModal').classList.add('open');
+      document.getElementById('modalTitle').textContent = '🎉 Login Successful';
+      setTimeout(closeModal, 3000);
+      loginAttempts = 0;
+    }, 1500);
+  }
+
+  function showReset() {
+    showToast('📧 Password reset link sent to your registered email', 'success');
+    closeModal();
+  }
+
+  function handleEnroll() {
+    document.getElementById('enrollBody').innerHTML = `
+      <div class="modal-success">
+        <span class="success-icon">🎉</span>
+        <h3>Application Received!</h3>
+        <p>Thank you for applying to Luminary Academy! Our admissions team will contact you within 2 business days to schedule a campus tour and discuss next steps.</p>
+        <div style="margin-top:20px;background:#f0fdf4;border-radius:10px;padding:14px;border:1px solid rgba(46,204,113,0.3)">
+          <div style="font-size:12px;color:var(--teal);font-weight:600">📧 Confirmation sent to your email</div>
+          <div style="font-size:11px;color:var(--text-light);margin-top:4px">Check your inbox for next steps and our admissions guide</div>
+        </div>
+      </div>`;
+    setTimeout(closeModal2, 4000);
+    showToast('🎓 Enrollment application submitted successfully!', 'success');
+  }
+
+  function quickEnroll() {
+    const email = document.getElementById('quickEmail').value;
+    if (!email || !email.includes('@')) { showToast('⚠️ Please enter a valid email address', 'warning'); return; }
+    showToast('📧 Admissions guide sent to ' + email, 'success');
+    document.getElementById('quickEmail').value = '';
+  }
+
+  // ===== HOMEWORK TOGGLE =====
+  function toggleHW(el) {
+    el.classList.toggle('done');
+    const cb = el.querySelector('.hw-checkbox');
+    if (el.classList.contains('done')) {
+      cb.textContent = '✓';
+      showToast('✅ Assignment marked complete! +XP earned', 'success');
+    } else {
+      cb.textContent = '';
+    }
+  }
+
+  // ===== TOAST =====
+  function showToast(msg, type = 'info') {
+    const tc = document.getElementById('toastContainer');
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    t.innerHTML = msg;
+    tc.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(100%)'; setTimeout(() => t.remove(), 400); }, 3500);
+  }
+
+  // ===== SCROLL REVEAL =====
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // ===== XSS PROTECTION DEMO (OWASP A03) =====
+  // All user inputs are sanitized before display
+  function sanitize(str) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
+  // ===== CSRF TOKEN SIMULATION (OWASP A01) =====
+  const csrfToken = Math.random().toString(36).substring(2, 15);
+  // Would be added to all form submissions in production
+
+  // ===== SESSION TIMEOUT SIMULATION (OWASP A07) =====
+  let sessionTimer;
+  function resetSessionTimer() {
+    clearTimeout(sessionTimer);
+    sessionTimer = setTimeout(() => {
+      showToast('⏱️ Session expired for security. Please log in again.', 'info');
+    }, 15 * 60 * 1000); // 15 min
+  }
+  document.addEventListener('mousemove', resetSessionTimer);
+  document.addEventListener('keypress', resetSessionTimer);
+
+  // ===== NAV SCROLL EFFECT =====
+  window.addEventListener('scroll', () => {
+    document.body.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // ===== ACTIVE NAV LINKS =====
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY + 100;
+    sections.forEach(s => {
+      const a = document.querySelector(`.nav-links a[href="#${s.id}"]`);
+      if (a) {
+        const inView = scrollY >= s.offsetTop && scrollY < s.offsetTop + s.offsetHeight;
+        a.style.color = inView ? 'var(--gold)' : '';
+      }
+    });
+  });
+
+  // Security headers reminder (content policy)
+  console.log('%c🛡️ Luminary Academy Security', 'font-size:18px;font-weight:bold;color:#1
